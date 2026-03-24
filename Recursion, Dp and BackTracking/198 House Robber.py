@@ -1,5 +1,5 @@
 class Solution:
-    def rob(self, nums: List[int]) -> int:
+    def rob(self, nums: list[int]) -> int:
         # f(i) = max(f(i+1), nums[i] + f(i+2))
         
         n = len(nums)
