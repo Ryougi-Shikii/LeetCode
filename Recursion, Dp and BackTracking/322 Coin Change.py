@@ -1,5 +1,5 @@
 class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
+    def coinChange(self, coins: list[int], amount: int) -> int:
         def f(amt, ind):
             if (ind,amt) in dp: return dp[(ind,amt)]
             if ind>=len(coins):
