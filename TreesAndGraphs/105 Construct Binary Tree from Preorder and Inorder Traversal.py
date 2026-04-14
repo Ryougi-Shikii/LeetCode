@@ -6,16 +6,20 @@ class TreeNode:
          self.right = right
 class Solution:
     def buildTree(self, preorder, inorder):
-        # psi / pei -> preorder starting / ending index
-        # isi / iei -> inorder starting / ending index
-        def f(psi, pei, isi, iei):
-            if psi>pei or isi>iei: return None
-            root = TreeNode(preorder[psi])
-            i=isi
-            while inorder[i] != root.val:
-                i+=1
-            lstnodes = i - isi
-            root.left = f(psi + 1, psi + lstnodes, isi, i-1)
-            root.right = f(psi + lstnodes +1, pei, i+1, iei)
-            return root
-        return f(0, len(preorder)-1, 0, len(inorder)-1)
+        if not preorder or not inorder:
+            return None
+        
+        mid = inorder.index(preorder[0])
+        root = TreeNode(preorder[0])
+
+        # inorder -> left inorder[:mid] right inorder[mid+1:]
+        # preorder -> left preorder[1: 1+len(inorder_left)] right preorder[1+len(inorder_left):]
+        inorder_left = inorder[:mid]
+        inorder_right = inorder[mid+1:]
+        preorder_left = preorder[1: 1+len(inorder_left)]
+        preorder_right = preorder[1+len(inorder_left):]
+
+        root.left = self.buildTree(preorder_left, inorder_left)
+        root.right = self.buildTree(preorder_right, inorder_right)
+        
+        return root
