@@ -14,3 +14,5 @@ print(df.shape)
 print(df['id'] == 3)
 
 
+# customers.drop_duplicates( subset = coloumn name, inplace )
+
